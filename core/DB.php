@@ -9,7 +9,7 @@
 class DB
 {
     private static $instance = null;
-    private $pdo, $query, $error = false, $result, $count, $lastIdInsert = null;
+    private $pdo, $query, $error = false, $result=[], $count, $lastIdInsert = null;
 
     /**
      * DB constructor. Připojení k databazi.

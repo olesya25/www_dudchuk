@@ -12,3 +12,7 @@ function dump_die ($data){
     echo "</pre>";
     die();
 }
+
+function sanit($data){
+    return htmlentities($data, ENT_QUOTES, 'UTF-8');
+}

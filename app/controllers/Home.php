@@ -14,20 +14,7 @@ class Home  extends Controller{
     }
 
     public function indexAction(){
-        $db = DB::getInstance();
-        $sql = "SELECT * FROM user";
-        $test = [
-            'category_name' => 'Test',
-            'category_description' => 'something else else'
-        ];
-        $users_result = $db->find('user', [
-            'condition' => "u_name = ?",
-            'bind' => ['Olesya'],
-            'order' => "u_name",
-            'limit' => 5
-
-        ]);
-        dump_die($users_result);
+        //$db = DB::getInstance();
         $this->view->render('home/index');
     }
 
