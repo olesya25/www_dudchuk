@@ -22,7 +22,8 @@ function autoload($className)
     } elseif (file_exists(ROOT . '/app/controllers/' . $className . '.php')) {
         require_once(ROOT . '/app/controllers/' . $className . '.php');
     } elseif (file_exists(ROOT . '/app/models/' . $className . '.php')) {
-        require_once(ROOT . '/app/controllers/' . $className . '.php');
+        require_once(ROOT . '/app/models/' . $className . '.php');
+
     }
 }
 

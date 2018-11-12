@@ -20,6 +20,7 @@ class Model{
     protected function setTableColumns(){
         $columns = $this->getColumns();
         foreach ($columns as $column){
+            $columnName = $column->Field;
             $this->columnNames[] = $column->Field;
             $this->{$columnName} = null;
         }
@@ -34,10 +35,7 @@ class Model{
         $resultQuery = $this->db->find($this->table, $params);
         foreach ($resultQuery as $res){
             $obj = new $this->modelName($this->table);
-            foreach ($res as $key => $value){
-                $obj->key = $value;
-
-            }
+            $obj->populateData($res);
             $result [] = $obj;
         }
         return $result;
@@ -51,15 +49,15 @@ class Model{
         }
     }
 
-    public function update($id, $name_id, $field){
+    public function update($id, $field){
         if(empty($field) || $id == ''){
             return false;
         }else{
-            return $this->db->update($this->table, $name_id, $id,$field);
+            return $this->db->update($this->table, $id,$field);
         }
     }
 
-    public function delete($name_id, $id = ''){
+    public function delete($id = ''){
         if($id == '' && $this->id == ''){
             return false;
         }
@@ -67,19 +65,20 @@ class Model{
             $id = $this->id;
         }
         if($this->delete){
-            return $this->update($id, $name_id, ['deleted' => 1]);
+            return $this->update($id,  ['deleted' => 1]);
         }
 
-        return $this->db->delete($this->table, $name_id, $id);
+        return $this->db->delete($this->table, $id);
 
     }
 
     public function findFirst($params=[]){
         $resultQuery = $this->db->findFirst($this->table, $params);
         $result = new $this->modelName($this->table);
-        foreach($resultQuery as $key => $value){
-            $result->key = $value;
+        if($resultQuery){
+            $result->populateData($resultQuery);
         }
+
         return $result;
 
     }
@@ -91,13 +90,13 @@ class Model{
         $this->db->query($sql,$bind);
     }
 
-    public function save($nameId){
+    public function save(){
         $fields = [];
         foreach ($this->columnNames as $columnName) {
             $fields[$columnName] = $this->$columnName;
         }
         if(property_exists($this, 'id') && $this->id != ''){
-            return $this->update($this->id, $nameId, $fields);
+            return $this->update($this->id, $fields);
         }else{
             return $this->insert($fields);
         }
@@ -113,6 +112,12 @@ class Model{
             return true;
         }
         return false;
+    }
+
+    public function populateData($result){
+        foreach($result as $key=>$value){
+            $this->$key = $value;
+        }
     }
 
 

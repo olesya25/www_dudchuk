@@ -1,4 +1,6 @@
-<?php $this->start('head')?>
+<?php $this->setTitle('Home')?>
+
+<?php $this->start('head'); ?>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -11,7 +13,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php echo PROOT ?>">Home</a></li>
+                <li class="active"><a href="#">Home</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -25,37 +27,21 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-
+                <li><a href="<?php echo PROOT ?>register/login""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </div>
 </nav>
-<?php $this->end()?>
-<?php $this->start('body')?>
-<div class="col-md-6 col-md-offset-3 well">
-    <form class="form" action="<?=PROOT?>register/login" method="post">
-        <h3 class="text-center">Log in!</h3>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="remember_me">Remember me <input type="checkbox" name="remember_me" id="remember_me"></label>
 
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Log in!" class="btn btn-large btn-primary">
+<?php $this->end(); ?>
 
-        </div>
-        <div class="text-right">
-            <a href="<?=PROOT?>register/register">Create an accout!</a>
-        </div>
+<?php $this->start('body'); ?>
+<div class="container">
+    <div class="container">
+        <h1 class="text-center red">WELCOME USER!</h1>
+    </div>
+    <?php $this->end(); ?>
 
-    </form>
-</div>
 
-<?php $this->end()?>
+
+

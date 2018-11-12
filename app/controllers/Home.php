@@ -6,7 +6,7 @@
  * Time: 15:57
  */
 
-class Home  extends Controller{
+class Home extends Controller{
 
 
     public function __construct($controller, $action){
@@ -14,7 +14,9 @@ class Home  extends Controller{
     }
 
     public function indexAction(){
-        //$db = DB::getInstance();
+
+        //dump_die($_SESSION);
+        //$db->update('users', 3, ['u_name'=>'Anastasia']);
         $this->view->render('home/index');
     }
 

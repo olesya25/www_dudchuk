@@ -106,9 +106,8 @@ class DB
         if($this->read($table, $params)){
             return $this->getResult();
 
-        }else{
-            return false;
         }
+        return false;
     }
 
     /**
@@ -121,9 +120,9 @@ class DB
         if($this->read($table, $params)){
             return $this->getFirst();
 
-        }else{
-            return false;
         }
+            return false;
+
     }
 
     /**
@@ -171,6 +170,7 @@ class DB
 
         $sql = "SELECT * FROM {$table}{$condition}{$order}{$limit}";
 
+
         if($this->query($sql, $bind)){
             if(!count($this->result)){
                 return false;
@@ -190,7 +190,7 @@ class DB
      * @param array $fields     Hodnoty, které chceme měnit
      * @return bool             Vratí true, pokud operace se podaříla, jinak - false.
      */
-    public  function update($table, $id_name, $id, $fields =[]){
+    public  function update($table, $id, $fields =[]){
         $fieldString = '';
         $values = [];
 
@@ -201,7 +201,7 @@ class DB
 
         $fieldString = trim($fieldString);
         $fieldString = rtrim($fieldString, ',');
-        $sql = "UPDATE {$table} SET {$fieldString} WHERE {$id_name} = {$id}";
+        $sql = "UPDATE {$table} SET {$fieldString} WHERE id = {$id}";
         //dump_die($sql);
         if(!$this->query($sql, $values)->error()){
             return true;
@@ -218,8 +218,8 @@ class DB
      * @param $id              ID
      * @return bool            Vratí true, pokud operace se podaříla, jinak - false.
      */
-    public function delete($table, $id_name, $id){
-        $sql = "DELETE FROM {$table} WHERE {$id_name} = {$id}";
+    public function delete($table, $id){
+        $sql = "DELETE FROM {$table} WHERE id = {$id}";
         if(!$this->query($sql)->error()){
             return true;
         }else{
