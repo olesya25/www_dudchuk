@@ -17,13 +17,23 @@ class Register extends Controller{
         $validation = new Validate();
 
     if($_POST){
-     $validation = true;
-        if($validation === true){
+     $validation->check($_POST, [
+         'username' => [
+             'display' => "Username",
+             'required' => true
+         ],
+         'password' => [
+             'display' => "Password",
+             'required' => true
+         ]
+     ]);
+        if($validation->passed()){
+            dump_die($validation->passed());
             $user = new Users($_POST['username']);
             $user->findByUsername($_POST['username']);
         //$user = $this->UsersModel->findByUserName($_POST['username']);
         //dump_die($user);
-            if($user->id != NULL){
+            //if($user->id != NULL){
                 if($user && password_verify(Input::get('password'), $user->u_password)){
 
                     $remember = false;
@@ -35,12 +45,12 @@ class Register extends Controller{
                     Router::redirect('home');
                 }
 
-            }
+            //}
 
         }
 
     }
-
+        $this->view->displayErrors = $validation->displayErrors();
         $this->view->render('register/login');
     }
 
