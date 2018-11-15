@@ -38,5 +38,10 @@ if(isset($_SERVER['PATH_INFO'])){
     $url = [];
 }
 
+if(!Session::exist(CURRENT_USER_SESSION_NAME) && Cookie::exist(REMEMBER_ME_COOKIE_NAME)){
+    Users::loginFromCookie();
+
+
+}
 Router::route($url);
 

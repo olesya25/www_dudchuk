@@ -24,11 +24,13 @@ class Register extends Controller{
          ],
          'password' => [
              'display' => "Password",
-             'required' => true
+             'required' => true,
+             'min' => 6
          ]
      ]);
+        //dump_die($validation->passed());
         if($validation->passed()){
-            dump_die($validation->passed());
+
             $user = new Users($_POST['username']);
             $user->findByUsername($_POST['username']);
         //$user = $this->UsersModel->findByUserName($_POST['username']);
@@ -43,6 +45,8 @@ class Register extends Controller{
 
                     $user->login($remember);
                     Router::redirect('home');
+                }else{
+                    $validation->addError("Incorrect username or password.");
                 }
 
             //}
@@ -52,6 +56,14 @@ class Register extends Controller{
     }
         $this->view->displayErrors = $validation->displayErrors();
         $this->view->render('register/login');
+    }
+
+
+    public function logoutAction(){
+        if(currentUser()){
+            currentUser()->logout();
+        }
+        Router::redirect( 'register/login');
     }
 
 }

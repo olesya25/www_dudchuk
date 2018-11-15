@@ -20,11 +20,13 @@ class Validate{
             $display = $rule['display'];
             foreach ($rule as $rule_name => $rule_value){
                 $value = Input::sanitize(trim ($data[$field]));
-
+               // dump_die($rule);
                 if($rule_name === 'required' && empty($value)){
                        $this->addError(["{$display} is required", $field]);
                 } else if(!empty($value)){
+
                     switch ($rule_name){
+
                         case 'min':
                             if(strlen($value) < $rule_value){
                                 $this->addError(["{$display} must be a minimum of {$rule_value} characters", $field]);
@@ -72,6 +74,10 @@ class Validate{
                 }
             }
         }
+        if(empty($this->errors)){
+            $this->passed = true;
+        }
+        return $this;
     }
 
     public function addError($error){
@@ -99,10 +105,16 @@ class Validate{
     public function displayErrors(){
         $html = '<ul class="bg-danger">';
         foreach ($this->errors as $error){
-            $html .= '<li class="text-danger">'.$error[0].'</li>';
-            $html .= '<script>jQuery("document").ready(function() {jQuery("#'.$error[1].'").parent().closest("div").addClass("has-error");
+            if(is_array($error)){
+                $html .= '<li class="text-danger">'.$error[0].'</li>';
+                $html .= '<script>jQuery("document").ready(function() {jQuery("#'.$error[1].'").parent().closest("div").addClass("has-error");
   
                         });</script>';
+            }else{
+                $html .= '<li class="text-danger">'.$error.'</li>';
+            }
+
+
         }
         $html .= '</ul>';
         return $html;

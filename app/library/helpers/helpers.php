@@ -16,3 +16,7 @@ function dump_die ($data){
 function sanit($data){
     return htmlentities($data, ENT_QUOTES, 'UTF-8');
 }
+
+function currentUser(){
+return Users::currentLoggedInUser();
+}

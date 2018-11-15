@@ -36,7 +36,31 @@ class Users extends Model{
 
          $usr = $this->findFirst(['condition' => 'u_username = ?', 'bind' => [$username]]);
          //dump_die($usr);
+        return $usr;
 
+    }
+    public static function currentLoggedInUser(){
+        if(!isset(self::$currentLoggedInUser) && Session::exist(CURRENT_USER_SESSION_NAME)){
+
+                $u = new Users((int) Session::get(CURRENT_USER_SESSION_NAME));
+                self::$currentLoggedInUser = $u;
+
+        }
+
+        return self::$currentLoggedInUser;
+    }
+    public static function loginFromCookie(){
+        $userSessionModel = new UserSession();
+        $userSessoin = $userSessionModel->findFirst([
+            'condition' => 'user_agent = ? AND session = ?',
+            'bind' => [Session::uagent_no_version(), Cookie::get(REMEMBER_ME_COOKIE_NAME)]
+            ]);
+
+        if($userSessoin->user_id != ''){
+             $user = new self((int)$userSessoin->user_id);
+        }
+        $user->login();
+        return $user;
     }
 
     public function login($rememberMe = false){
@@ -50,6 +74,18 @@ class Users extends Model{
             $this->db->insert('user_session', $fields);
         }
     }
+
+    public function logout(){
+        $user_agent = Session::uagent_no_version();
+        $this->db->query("DELETE FROM user_session WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
+        Session::delete(CURRENT_USER_SESSION_NAME);
+        if(Cookie::exist(REMEMBER_ME_COOKIE_NAME)){
+            Cookie::delete(REMEMBER_ME_COOKIE_NAME);
+        }
+        self::$currentLoggedInUser = null;
+        return true;
+    }
+
 
 
 

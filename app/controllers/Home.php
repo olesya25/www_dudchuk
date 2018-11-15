@@ -15,7 +15,7 @@ class Home extends Controller{
 
     public function indexAction(){
 
-        //dump_die($_SESSION);
+        dump_die($_SESSION);
         //$db->update('users', 3, ['u_name'=>'Anastasia']);
         $this->view->render('home/index');
     }

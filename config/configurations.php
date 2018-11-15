@@ -17,4 +17,4 @@ define('DEFAULT_LAYOUT', 'default'); // pokud layout neni nastaven v kontrollerr
 define('DEFAULT_TITLE', 'Training dairy'); // nazev webu, pokud neni nastaveny jinak
 define('CURRENT_USER_SESSION_NAME', 'ffdrtsynfRRKGUbfASVCNvdj'); // nazev session pro prrihlasenych uzivatlu
 define('REMEMBER_ME_COOKIE_NAME', 'fbbahcyrriyubndERTDHFhg'); // nazev cookie pro prrihlasenych uzivateli remember me
-define('REMEMBER_COOKIE_EXPIRE', 604800); // 30 dni - 604800 sec
+define('REMEMBER_COOKIE_EXPIRE', 2592000); // 30 dni -2592000 sec
