@@ -19,6 +19,8 @@ class DB
     {
         try {
             $this->pdo = new PDO('mysql:host=' . HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
+            //$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //$this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
         } catch (PDOException $exception) {
             die($exception->getMessage());

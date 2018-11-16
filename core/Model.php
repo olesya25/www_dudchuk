@@ -13,6 +13,7 @@ class Model{
     public function __construct($table){
         $this->db = DB::getInstance();
         $this->table = $table;
+        $this->setTableColumns();
         $this->modelName = str_replace(' ', '', ucwords(str_replace('_', ' ', $this->table)));
     }
 
@@ -83,7 +84,7 @@ class Model{
 
     }
     public function findById($id){
-        return $this->findFirst(['condotion'=>"id = ?", 'bind' => [$id]]);
+        return $this->findFirst(['condition'=>"id = ?", 'bind' => [$id]]);
     }
 
     public function query($sql, $bind=[]){
@@ -92,6 +93,7 @@ class Model{
 
     public function save(){
         $fields = [];
+        //dump_die($fields);
         foreach ($this->columnNames as $columnName) {
             $fields[$columnName] = $this->$columnName;
         }
@@ -103,8 +105,9 @@ class Model{
     }
 
     public function assign($params){
-        if(empty($params)){
+        if(!empty($params)){
             foreach ($params as $key => $value){
+                //dump_die($this->columnNames);
                 if(in_array($key, $this->columnNames)){
                     $this->$key = sanit($value);
                 }

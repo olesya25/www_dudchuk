@@ -18,5 +18,22 @@ function sanit($data){
 }
 
 function currentUser(){
-return Users::currentLoggedInUser();
+    return Users::currentLoggedInUser();
 }
+
+function postedValues($post){
+    $auxArray = [];
+    foreach ($post as $key => $value){
+        $auxArray[$key] = sanit($value);
+    }
+
+    return $auxArray;
+}
+function currentPage(){
+    $currentPage = $_SERVER['REQUEST_URI'];
+    if($currentPage == PROOT || $currentPage == PROOT. 'home/index'){
+        $currentPage = PROOT.'home';
+    }
+    return $currentPage;
+}
+

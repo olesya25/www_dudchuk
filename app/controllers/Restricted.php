@@ -2,20 +2,19 @@
 /**
  * Created by PhpStorm.
  * User: olesya
- * Date: 07/11/2018
- * Time: 15:57
+ * Date: 15/11/2018
+ * Time: 20:58
  */
 
-class Home extends Controller{
-
-
+class Restricted extends Controller{
     public function __construct($controller, $action){
         parent::__construct($controller, $action);
     }
 
     public function indexAction(){
 
-        $this->view->render('home/index');
+        $this->view->render('restricted/index');
     }
+
 
 }

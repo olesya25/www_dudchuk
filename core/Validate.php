@@ -46,7 +46,7 @@ class Validate{
                             }
                             break;
                         case 'unique':
-                            $check = $this->db->query("SELECT {'u_'.$field} FROM {$rule_value} WHERE {$field} = ?", [$value]);
+                            $check = $this->db->query("SELECT {$field} FROM {$rule_value} WHERE {$field} = ?", [$value]);
                             if($check->getCount()){
                                 $this->addError(["This {$display} already exists. Please choose another {$display}", $field]);
                             }

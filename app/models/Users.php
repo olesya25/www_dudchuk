@@ -18,18 +18,21 @@ class Users extends Model{
         $this->sessionName = CURRENT_USER_SESSION_NAME;
         $this->cookieName = REMEMBER_ME_COOKIE_NAME;
         $this->delete = true;
-        if(is_int($user)){
-           $usr =  $this->db->findFirst('users', ['condition'=>'id = ?', 'bind' => [$user]]);
-        }else{
-            $usr = $this->db->findFirst('users',['condition' => 'u_username = ?', 'bind' => [$user]]);
+        if($user != ''){
+            if(is_int($user)){
+                $usr =  $this->db->findFirst('users', ['condition'=>'id = ?', 'bind' => [$user]]);
+            }else{
+                $usr = $this->db->findFirst('users',['condition' => 'u_username = ?', 'bind' => [$user]]);
 
-        }
+            }
 
-        if($usr){
-            foreach ($usr as $key => $value){
-                $this->$key = $value;
+            if($usr){
+                foreach ($usr as $key => $value){
+                    $this->$key = $value;
+                }
             }
         }
+
     }
 
     public function findByUsername($username){
@@ -50,17 +53,26 @@ class Users extends Model{
         return self::$currentLoggedInUser;
     }
     public static function loginFromCookie(){
-        $userSessionModel = new UserSession();
-        $userSessoin = $userSessionModel->findFirst([
-            'condition' => 'user_agent = ? AND session = ?',
-            'bind' => [Session::uagent_no_version(), Cookie::get(REMEMBER_ME_COOKIE_NAME)]
-            ]);
+        $userSession = UserSession::getFromCookie();
 
-        if($userSessoin->user_id != ''){
-             $user = new self((int)$userSessoin->user_id);
+        if($userSession->user_id != ''){
+             $user = new self((int)$userSession->user_id);
         }
-        $user->login();
+        if($user){
+            $user->login();
+        }
+
         return $user;
+    }
+
+    public function registerNewUser($params){
+
+        $params['u_registration_date'] = date("Y-m-d H:i:s");
+        $this->assign($params);
+        $this->u_password = password_hash($this->u_password, PASSWORD_DEFAULT);
+
+        $this->save();
+
     }
 
     public function login($rememberMe = false){
@@ -76,14 +88,24 @@ class Users extends Model{
     }
 
     public function logout(){
-        $user_agent = Session::uagent_no_version();
-        $this->db->query("DELETE FROM user_session WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
+        $userSession = UserSession::getFromCookie();
+        if($userSession){
+            $userSession->delete();
+        }
         Session::delete(CURRENT_USER_SESSION_NAME);
         if(Cookie::exist(REMEMBER_ME_COOKIE_NAME)){
             Cookie::delete(REMEMBER_ME_COOKIE_NAME);
         }
         self::$currentLoggedInUser = null;
         return true;
+    }
+
+    public function acl(){
+        $role = new Role();
+        $role_obj = $role->findById($this->fk_role_id);
+        $acl = $role_obj->role_name;
+
+        return $acl;
     }
 
 

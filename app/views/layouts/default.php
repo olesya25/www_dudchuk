@@ -13,7 +13,10 @@
     <title><?= $this->title ?></title>
 </head>
 <body>
+<?php include ('main_menu.php')?>
+<div class="container-fluid" style="min-height:cal(100% - 125px);">
+    <?= $this->getContent('body'); ?>
+</div>
 
-<?= $this->getContent('body'); ?>
 </body>
 </html>

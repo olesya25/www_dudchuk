@@ -29,7 +29,9 @@ function autoload($className)
 
 
 spl_autoload_register('autoload');
+//session_set_cookie_params(0);
 session_start();
+
 $url =  array();
 
 if(isset($_SERVER['PATH_INFO'])){
@@ -37,7 +39,7 @@ if(isset($_SERVER['PATH_INFO'])){
 }else{
     $url = [];
 }
-
+//dump_die(Session::exist(CURRENT_USER_SESSION_NAME));
 if(!Session::exist(CURRENT_USER_SESSION_NAME) && Cookie::exist(REMEMBER_ME_COOKIE_NAME)){
     Users::loginFromCookie();
 

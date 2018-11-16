@@ -1,0 +1,11 @@
+{
+  "Home" : "home",
+  "Tools": {
+    "My Tools" : "tools",
+    "separator": "",
+    "Tools 1" : "tools/first",
+    "Tools 2" : "tools/second"
+  },
+  "Login" : "register/login",
+  "Logout" : "register/logout"
+}
