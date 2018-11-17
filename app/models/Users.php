@@ -120,7 +120,13 @@ class Users extends Model{
      * @param $id       id uzivatele, kteromu prirazujeme role
      */
     public function assignCoach($id){
-        $this->update($id, ['fk_role_id' => 3]);
+        if( $this->update($id, ['fk_role_id' => 3, 'coach_permission' => 0])){
+
+            //dump_die($id);
+            return "The role of coach was assigned";
+        }else{
+            return "Some error occurred";
+        }
     }
 
     public function showAllUsers(){

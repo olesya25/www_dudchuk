@@ -14,14 +14,7 @@ public function __construct($controller, $action){
 }
 
 public function mydiaryAction(){
-    $training = new Training(currentUser()->id);
-    $userTr = $training->getTraining();
 
-    if(!empty($userTr)){
-        $userTr = $training->getTraining();
-
-        //var_dump($userTr);
-    }
     $this->view->render('diary/mydiary');
 }
 public function createAction(){
@@ -32,5 +25,10 @@ public function createAction(){
         $this->view->render('diary/createtraining');
     }
 
+    public function drillsAction(){
+
+
+        $this->view->render('diary/drills');
+    }
 
 }

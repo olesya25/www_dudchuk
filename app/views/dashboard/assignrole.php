@@ -16,10 +16,10 @@ $usersRequests = $user->find([
         alert("Sure you want to deny the request?");
     }
     function accept() {
-        alert("Accept the request? ");
+        var role = <?php $user->assignCoach(2)?>
+       return false;
     }
 </script>
-<h1 class="text-center red">Here will be a list of users that have sent a request</h1>
 <body>
 <div class="container">
     <div class="">
@@ -40,16 +40,17 @@ $usersRequests = $user->find([
             <tbody>
             <?php
             if(is_array($usersRequests)){
+                $btn = 1;
                 foreach ($usersRequests as $request) {
-
-                    echo '<tr>';
+                    echo '<tr id="something'. $btn .'">';
                     echo '<td>'. $request->u_name . '</td>';
                     echo '<td>'. $request->u_email. '</td>';
                     echo '<td>'. $request->name_of_pdf. '</td>';
                     echo '<td><a type="button" class="btn btn-warning">Read</a></td>';
-                    echo '<td><button type="button" onclick="accept()"class="btn btn-success">Accept</button></td>';
+                    echo '<td><button id="mybutton'. $btn .'" type="button" onclick="accept()"class="btn btn-success">Accept</button></td>';
                     echo '<td><button type="button" onclick="deny()" class="btn btn-danger">Deny</button></td>';
                     echo '</tr>';
+                    $btn++;
                 }
             }else{
                 echo '<tr>';
@@ -68,6 +69,13 @@ $usersRequests = $user->find([
     </div>
 </div> <!-- /container -->
 </body>
+<script>
+    $(document).ready(function () {
+        $('#mybutton').on('click', function () {
+            $('#something').slideToggle(200);
+        });
+    })
+</script>
 
 <?php $this->end(); ?>
 

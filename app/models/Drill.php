@@ -6,7 +6,11 @@
  * Time: 13:45
  */
 
-class Drill
+class Drill extends Model
 {
+public function __construct(){
+    $table = 'drill';
+    parent::__construct($table);
+}
 
 }

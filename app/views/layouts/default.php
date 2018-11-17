@@ -15,6 +15,7 @@
 <body>
 <?php include ('main_menu.php')?>
 <div class="container-fluid" style="min-height:cal(100% - 125px);">
+    <?php include ( 'side_menu.php')?>
     <?= $this->getContent('body'); ?>
 </div>
 

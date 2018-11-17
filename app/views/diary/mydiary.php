@@ -15,7 +15,16 @@ if(!empty($userTr)){
 
 <?php $this->start('body'); ?>
 
-<h1 class="text-center red"><?=$userTr[0]->training_notes?></h1>
+<h1 class="text-center red"><?
+
+    if(is_array($userTr)){
+     echo $userTr[0]->training_notes;
+    }
+    else{
+        echo $userTr;
+    }?>
+
+   </h1>
 
 <?php $this->end(); ?>
 
