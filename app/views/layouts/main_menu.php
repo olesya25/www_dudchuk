@@ -1,19 +1,8 @@
 <?php
 $menu = Router::getMenu('menu_acl');
 $currentPage = currentPage();
+$html ='';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
-
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -22,7 +11,7 @@ $currentPage = currentPage();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href=""><?=WEB_NAME?></a>
+            <a class="navbar-brand"><?=WEB_NAME?></a>
         </div>
         <div class="collapse navbar-collapse" id="main_menu">
             <ul class="nav navbar-nav">
@@ -30,14 +19,13 @@ $currentPage = currentPage();
                     $active = ''; ?>
                 <?php if(is_array($value)): ?>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?=$key?><span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><?=$key?><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <?php foreach ($value as $k => $v):
                                 $active = ($v == $currentPage)? 'active': ''; ?>
                             <?php if($k == 'separator'): ?>
                                 <li role="separator" class="divider"></li>
                             <?php else: ?>
-
                                 <li><a class="<?=$active?>" href="<?=$v?>"><?=$k?></a></li>
                             <?php endif;?>
 
@@ -46,17 +34,15 @@ $currentPage = currentPage();
                     </li>
                 <?php else:
                     $active = ($value == $currentPage)? 'active': ''; ?>
-                    <?php if($key == 'Login'): ?>
-                    <?php $html = '<li><a href="'.$value.'"><span class="glyphicon glyphicon-log-in"></span>' .$key.'</a></li>'?>
-                    <?php endif; ?>
-                    <?php if($key == 'Logout'): ?>
-                    <?php $html = '<li><a href="'.$value.'"><span class="glyphicon glyphicon-log-in"></span>' .$key.'</a></li>'?>
-                <?php endif; ?>
-                    <?php if($key == 'Signup'): ?>
-                    <?php $html = '<li><a href="'.$value.'"><span class="glyphicon glyphicon-log-in"></span>' .$key.'</a></li>'?>
-                <?php endif; ?>
-
+                <?php if($key == 'Login'): ?>
+                    <?php $html .= '<li><a href="'.$value.'"><span class="glyphicon glyphicon-log-in"></span>' .$key.'</a></li>'?>
+                <?php elseif($key == 'Logout'): ?>
+                    <?php $html .= '<li><a href="'.$value.'"><span class="glyphicon glyphicon-log-in"></span>' .$key.'</a></li>'?>
+                <?php elseif($key == 'Signup'): ?>
+                    <?php $html .= '<li><a href="'.$value.'"><span class="glyphicon glyphicon-user"></span>' .$key.'</a></li>'?>
+               <?php else: ?>
                     <li><a class="<?=$active?>" href="<?=$value?>"><?=$key?></a></li>
+                <?php endif; ?>
                 <?php endif; ?>
                 <?php endforeach; ?>
 
@@ -66,8 +52,6 @@ $currentPage = currentPage();
                 <li><a href="#">Hello <?=currentUser()->u_name?></a></li>
                 <?php endif; ?>
                 <?=$html?>
-<!--                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
-<!--               // <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
             </ul>
         </div>
     </div>

@@ -68,6 +68,7 @@ class Users extends Model{
     public function registerNewUser($params){
 
         $params['u_registration_date'] = date("Y-m-d H:i:s");
+        $params['fk_role_id'] = 2;
         $this->assign($params);
         $this->u_password = password_hash($this->u_password, PASSWORD_DEFAULT);
 
@@ -103,9 +104,27 @@ class Users extends Model{
     public function acl(){
         $role = new Role();
         $role_obj = $role->findById($this->fk_role_id);
+
         $acl = $role_obj->role_name;
 
-        return $acl;
+        if (isset($acl)){
+            return $acl;
+        }else{
+            return false;
+        }
+
+    }
+
+    /**
+     * Priradi role trenera uzivateli
+     * @param $id       id uzivatele, kteromu prirazujeme role
+     */
+    public function assignCoach($id){
+        $this->update($id, ['fk_role_id' => 3]);
+    }
+
+    public function showAllUsers(){
+       return $this->showAll();
     }
 
 

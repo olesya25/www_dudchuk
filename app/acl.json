@@ -1,7 +1,7 @@
 {
   "Guest": {
     "denied" : {},
-    "Home" : ["*"],
+    "Home" : ["index"],
     "Register" : ["login", "register"],
     "Restricted" : ["*"]
   },
@@ -14,12 +14,20 @@
     "Tools" : ["*"]
   },
   "User" : {
-    "denied" : {}
+    "denied" : {},
+    "Home" : ["userindex", "coachrequest"],
+    "Diary" : ["*"]
+  },
+
+  "Coach" : {
+    "denied" : {},
+    "Home" : ["coachindex"]
   },
   "Admin" : {
-    "denied" : {}
-  },
-  "Coach" : {
-    "denied" : {}
+    "denied" : {
+      "Tools" : ["index"]
+    },
+    "Home" : ["adminindex"],
+    "Dashboard": ["*"]
   }
 }

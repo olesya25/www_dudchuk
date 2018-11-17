@@ -48,7 +48,7 @@ class DB
         $this->error = false;
         if($this->query = $this->pdo->prepare($sql)){
             $x = 1;
-            if(count($parameters)){
+            if(count($parameters) && is_array($parameters)){
                 foreach ($parameters as $p){
                     $this->query->bindValue($x, $p);
                     $x++;

@@ -34,13 +34,23 @@ class Model{
     public function find($params =[]){
         $result = [];
         $resultQuery = $this->db->find($this->table, $params);
-        foreach ($resultQuery as $res){
-            $obj = new $this->modelName($this->table);
-            $obj->populateData($res);
-            $result [] = $obj;
+        if(is_array($resultQuery)){
+            foreach ($resultQuery as $res){
+                $obj = new $this->modelName($this->table);
+                $obj->populateData($res);
+                $result [] = $obj;
+            }
         }
+
         return $result;
 
+    }
+    public function showAll(){
+        $result =[];
+        $sql = "SELECT * FROM {$this->table}";
+        $result [] = $this->db->query($sql);
+        //dump_die($result);
+             return $result;
     }
     public function insert($fields){
         if(empty($fields)){

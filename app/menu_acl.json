@@ -1,5 +1,14 @@
 {
-  "Home" : "home",
+  "Home" : "home/index",
+  "Whant to be a coach" : "home/coachrequest",
+  "Dashboard" : {
+    "Show users list" : "dashboard/dashboard",
+    "Assign role of coach" : "dashboard/assignrole"
+  },
+  "Diary" : {
+    "My Diary" : "diary/mydiary",
+    "New Training" : "diary/createtraining"
+  },
   "Tools": {
     "My Tools" : "tools",
     "separator": "",
@@ -7,5 +16,6 @@
     "Tools 2" : "tools/second"
   },
   "Login" : "register/login",
-  "Logout" : "register/logout"
+  "Logout" : "register/logout",
+  "Signup" : "register/register"
 }

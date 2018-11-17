@@ -7,8 +7,8 @@
  */
 
 class Validate{
-    private $passed = false, $errors =[], $db =  null;
-
+    private $passed = false, $errors =[], $success, $db =  null;
+    public $fileName ='';
     public function __construct(){
         $this->db = DB::getInstance();
     }
@@ -102,6 +102,54 @@ class Validate{
         return $this->errors;
     }
 
+    public function fileUpload(){
+        if(empty($_FILES)){
+            return false;
+        }else{
+            $this->errors = [];
+
+            $currentDir = getcwd();
+            $uploadDirectory = "/uploads/";
+
+            $fileExtensions = ['pdf','docx','doc']; // Get all the file extensions
+
+            $fileName = $_FILES['fileToUpload']['name'];
+            $fileSize = $_FILES['fileToUpload']['size'];
+            $fileTmpName  = $_FILES['fileToUpload']['tmp_name'];
+            $tmp = explode('.',$fileName);
+            $fileExtension = strtolower(end($tmp));
+
+            $uploadPath = $currentDir . $uploadDirectory . basename($fileName);
+
+            if (isset($_POST['send_cv'])) {
+
+                if (! in_array($fileExtension,$fileExtensions)) {
+                    $this->addError(["This file extension is not allowed. Please upload a PDF, DOCX or DOC file"]);
+                }
+
+                if ($fileSize > 2000000) {
+                    $this->addError(["This file is more than 2MB. Sorry, it has to be less than or equal to 2MB"]);
+                }
+
+                if (empty($this->errors)) {
+                    $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
+                    if ($didUpload) {
+                        $this->success = "File \" ". basename($fileName) ." \" has been uploaded";
+                        $this->fileName = basename($fileName);
+                        return true;
+                    } else {
+                        $this->addError(["An error occurred somewhere. Try again or contact the admin"]);
+                        return false;
+                    }
+                } else {
+                    return false;
+                    }
+                }
+            }
+        }
+
+
+
     public function displayErrors(){
         $html = '<ul class="bg-danger">';
         foreach ($this->errors as $error){
@@ -117,6 +165,11 @@ class Validate{
 
         }
         $html .= '</ul>';
+        return $html;
+    }
+
+    public function displaySuccess(){
+        $html = '<ul class="bg-success"><li class="text-success">'.$this->success.'</li></ul>';
         return $html;
     }
 

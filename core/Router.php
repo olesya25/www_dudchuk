@@ -92,15 +92,11 @@ class Router{
         }
 
         foreach ($currentUserAcl as $levelAccess){
-
-           // if(array_key_exists('denied', $acl[$levelAccess])){
-                //dump_die($acl);
                 $denied = $acl[$levelAccess]['denied'];
                 if(!empty($denied) && array_key_exists($controller_name, $denied) && in_array($action_name, $denied[$controller_name])){
                     $access = false;
                     break;
                 }
-            //}
         }
 
         return $access;
@@ -113,6 +109,7 @@ class Router{
         $menuFile = file_get_contents(ROOT. '/app/'.$menu.'.json');
 
         $acl = json_decode($menuFile, true);
+
         foreach ($acl as $key => $value){
             if(is_array($value)){
                 $subMenu = [];
@@ -147,7 +144,7 @@ class Router{
             $urlArray = explode('/', $value);
             $controller_name = ucwords($urlArray[0]);
             $action_name = (isset($urlArray[1]))? $urlArray[1] : '';
-            //dump_die($controller_name);
+
             if(self::hasAccess($controller_name, $action_name)){
 
                 return PROOT.$value;

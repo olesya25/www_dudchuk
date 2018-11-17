@@ -7,7 +7,7 @@
 <?php $this->start('body'); ?>
 <div class="container">
     <div class="container">
-        <h1 class="text-center red">WELCOME USER!</h1>
+        <h1 class="text-center red">WELCOME USERR!</h1>
     </div>
     <?php $this->end(); ?>
 
