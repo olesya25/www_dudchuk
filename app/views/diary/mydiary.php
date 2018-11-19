@@ -25,6 +25,7 @@ if(!empty($userTr)){
     }?>
 
    </h1>
+<button class="btn-primary"> Create a new training</button>
 
 <?php $this->end(); ?>
 

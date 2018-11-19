@@ -7,5 +7,6 @@
 <?php $this->start('body'); ?>
 
 <h1 class="text-center red">Create TR</h1>
+<a href="drills">Here</a>
 
 <?php $this->end(); ?>

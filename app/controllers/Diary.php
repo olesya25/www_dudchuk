@@ -31,4 +31,8 @@ public function createAction(){
         $this->view->render('diary/drills');
     }
 
+    public function categoryAction(){
+        $this->view->render('diary/category');
+    }
+
 }

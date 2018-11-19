@@ -38,20 +38,26 @@ class Home extends Controller{
         $this->view->render('home/userindex');
     }
     public function coachrequestAction(){
-        $validation = new Validate();
 
-        if($validation->fileUpload()){
-            $fileName = $validation->fileName;
-            //dump_die($fileName);
-            $this->view->displayErrors = $validation->displaySuccess();
-            $user = new Users();
-            $user->update(currentUser()->id, [
-                'coach_permission' => '1',
-                'name_of_pdf' => $fileName
-            ]);
-        }else{
-            $this->view->displayErrors = $validation->displayErrors();
-        }
+
+            $validation = new Validate();
+            if($validation->fileUpload()){
+                $fileName = $validation->fileName;
+                //dump_die($fileName);
+                $this->view->displayErrors = $validation->displaySuccess();
+                $message = Input::sanitize($_POST['intro']);
+               // dump_die($message);
+                $user = new Users();
+                $user->update(currentUser()->id, [
+                    'message_to_admin' => $message,
+                    'coach_permission' => '1',
+                    'name_of_pdf' => $fileName
+                ]);
+            }else{
+                $this->view->displayErrors = $validation->displayErrors();
+            }
+
+
         $this->view->render('home/coachrequest');
     }
     /**

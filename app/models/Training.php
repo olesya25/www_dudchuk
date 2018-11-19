@@ -21,4 +21,8 @@ class Training extends Model{
         return $training;
     }
 
+    public function insertNewTraining($params){
+
+    }
+
 }

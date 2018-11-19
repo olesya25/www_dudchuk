@@ -42,13 +42,13 @@ $usersRequests = $user->find([
             if(is_array($usersRequests)){
                 $btn = 1;
                 foreach ($usersRequests as $request) {
-                    echo '<tr id="something'. $btn .'">';
+                    echo '<tr id="btn'. $btn .'">';
                     echo '<td>'. $request->u_name . '</td>';
                     echo '<td>'. $request->u_email. '</td>';
                     echo '<td>'. $request->name_of_pdf. '</td>';
                     echo '<td><a type="button" class="btn btn-warning">Read</a></td>';
-                    echo '<td><button id="mybutton'. $btn .'" type="button" onclick="accept()"class="btn btn-success">Accept</button></td>';
-                    echo '<td><button type="button" onclick="deny()" class="btn btn-danger">Deny</button></td>';
+                    echo '<td><button data-accept="mybutton'. $btn .'" type="button" onclick="accept()"class="btn btn-success">Accept</button></td>';
+                    echo '<td><button data-deny="mybutton'. $btn .'" type="button" onclick="deny()" class="btn btn-danger">Deny</button></td>';
                     echo '</tr>';
                     $btn++;
                 }
@@ -59,8 +59,8 @@ $usersRequests = $user->find([
                 echo '<td>'. $usersRequests->name_of_pdf. '</td>';
                 echo '<div class="w3-bar">';
                 echo '<td><a type="button" class="btn btn-warning">Read</a></td>';
-                echo '<td><button  type="button" onclick="accept()" class="btn btn-success">Accept</button></td>';
-                echo '<td><button type="button" onclick="deny()" class="btn btn-danger">Deny</button></td>';
+                echo '<td><button  data-accept ="mybutton1" type="button"  class="btn btn-success">Accept</button></td>';
+                echo '<td><button data-deny ="mybutton1" type="button"  class="btn btn-danger">Deny</button></td>';
                 echo '</tr>';
             }
             ?>
@@ -69,10 +69,22 @@ $usersRequests = $user->find([
     </div>
 </div> <!-- /container -->
 </body>
+
 <script>
     $(document).ready(function () {
-        $('#mybutton').on('click', function () {
-            $('#something').slideToggle(200);
+        $('.btn ').on('click', function () {
+            var btnAccept = $(this).attr('data-accept');
+
+            alert(btnAccept);
+
+        });
+    })
+    $(document).ready(function () {
+        $('.btn ').on('click', function () {
+            var btnDeny = $(this).attr('data-deny');
+
+            alert(btnDeny);
+
         });
     })
 </script>

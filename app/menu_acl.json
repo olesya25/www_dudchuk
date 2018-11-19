@@ -5,14 +5,18 @@
     "Show users list" : "dashboard/dashboard",
     "Assign role of coach" : "dashboard/assignrole"
   },
-  "Diary" : "diary/mydiary",
+  "Diary" : {
+    "My diary" : "diary/mydiary",
+    "New Training" : "diary/createtraining",
+    "List of drills" : "diary/drills"
+  },
   "Tools": {
     "My Tools" : "tools",
     "separator": "",
     "Tools 1" : "tools/first",
     "Tools 2" : "tools/second"
   },
-  "Catgories" : "diary/category",
+  "Categories" : "diary/category",
   "List of drills" : "diary/drills",
   "Login" : "register/login",
   "Logout" : "register/logout",
