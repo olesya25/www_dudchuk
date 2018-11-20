@@ -1,3 +1,4 @@
+
 <?php $this->setTitle('Home')?>
 
 <?php $this->start('head'); ?>
@@ -14,7 +15,7 @@
             <input type="file" name="fileToUpload" id="fileToUpload">
         </div>
         <div class="form-group">
-            <label for="intro">Brief intro</label>
+            <label for="intro">Message to admin</label>
             <input type="text" name="intro" id="intro" class="form-control">
         </div>
         <div class="form-group">

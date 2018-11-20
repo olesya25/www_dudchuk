@@ -1,6 +1,7 @@
 <?php $this->setTitle('Home')?>
 
 <?php $this->start('head'); ?>
+
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
@@ -21,7 +22,8 @@ $usersRequests = $user->find([
     }
 </script>
 <body>
-<div class="container">
+
+<div class="container"><!-- main container-->
     <div class="">
         <h3 class="text-center">Requests from users</h3>
     </div>
@@ -37,7 +39,6 @@ $usersRequests = $user->find([
                 <th>Deny</th>
             </tr>
             </thead>
-            <tbody>
             <?php
             if(is_array($usersRequests)){
                 $btn = 1;
@@ -46,11 +47,23 @@ $usersRequests = $user->find([
                     echo '<td>'. $request->u_name . '</td>';
                     echo '<td>'. $request->u_email. '</td>';
                     echo '<td>'. $request->name_of_pdf. '</td>';
-                    echo '<td><a type="button" class="btn btn-warning">Read</a></td>';
-                    echo '<td><button data-accept="mybutton'. $btn .'" type="button" onclick="accept()"class="btn btn-success">Accept</button></td>';
-                    echo '<td><button data-deny="mybutton'. $btn .'" type="button" onclick="deny()" class="btn btn-danger">Deny</button></td>';
+                    echo '<td><a data-read="read'. $btn .'" type="button" class="btn btn-warning">Read</a></td>';
+                    echo '<td><button data-accept="accept'. $btn .'" type="button" onclick="accept()"class="btn btn-success">Accept</button></td>';
+                    echo '<td><button data-deny="deny'. $btn .'" type="button" onclick="deny()" class="btn btn-danger">Deny</button></td>';
                     echo '</tr>';
                     $btn++;
+                    echo'<div style="display: none" id="info" class="container">';
+                    echo'<div class="row">';
+                    echo'<div class="col-sm-6">';
+                    echo'<div class="card bg-info">';
+                    echo' <div class="card-body">';
+                    echo'<h5 class="card-title">Message</h5>';
+                    echo'<h5 class="card-text">'. $request->message_to_admin . '</h5>';
+                    echo'</div>';
+                    echo'</div>';
+                    echo'</div>';
+                    echo'</div>';
+                    echo'</div>';
                 }
             }else{
                 echo '<tr>';
@@ -58,32 +71,56 @@ $usersRequests = $user->find([
                 echo '<td>'. $usersRequests->u_email. '</td>';
                 echo '<td>'. $usersRequests->name_of_pdf. '</td>';
                 echo '<div class="w3-bar">';
-                echo '<td><a type="button" class="btn btn-warning">Read</a></td>';
-                echo '<td><button  data-accept ="mybutton1" type="button"  class="btn btn-success">Accept</button></td>';
-                echo '<td><button data-deny ="mybutton1" type="button"  class="btn btn-danger">Deny</button></td>';
+                echo '<td><a data-read="read1" type="button" class="btn btn-warning">Read</a></td>';
+                echo '<td><button  data-accept ="accept1" type="button"  class="btn btn-success">Accept</button></td>';
+                echo '<td><button data-deny ="deny1" type="button"  class="btn btn-danger">Deny</button></td>';
                 echo '</tr>';
             }
             ?>
             </tbody>
         </table>
+
     </div>
 </div> <!-- /container -->
+
 </body>
 
+<div style="display: none" id="info" class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card bg-info">
+                <div class="card-body">
+                    <h5 class="card-title">'. $v->drill_name . '</h5>
+                    <p class="card-text">'. $v->drill_description.'</p>
+                    <a href="#" class="btn btn-primary btn-xs">Close</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 <script>
     $(document).ready(function () {
-        $('.btn ').on('click', function () {
+        $('.btn-success ').on('click', function () {
             var btnAccept = $(this).attr('data-accept');
 
-            alert(btnAccept);
+
 
         });
     })
     $(document).ready(function () {
-        $('.btn ').on('click', function () {
+        $('.btn-danger ').on('click', function () {
             var btnDeny = $(this).attr('data-deny');
 
             alert(btnDeny);
+
+        });
+    })
+    $(document).ready(function () {
+        $('.btn-warning').on('click', function () {
+            var btnDeny = $(this).attr('data-read');
+
+            $('#info').toggle();
 
         });
     })

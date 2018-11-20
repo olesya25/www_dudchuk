@@ -10,14 +10,6 @@
     "New Training" : "diary/createtraining",
     "List of drills" : "diary/drills"
   },
-  "Tools": {
-    "My Tools" : "tools",
-    "separator": "",
-    "Tools 1" : "tools/first",
-    "Tools 2" : "tools/second"
-  },
-  "Categories" : "diary/category",
-  "List of drills" : "diary/drills",
   "Login" : "register/login",
   "Logout" : "register/logout",
   "Signup" : "register/register"

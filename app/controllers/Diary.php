@@ -22,6 +22,28 @@ public function createAction(){
 }
     public function createtrainingAction(){
 
+        $drills = new Drill();
+        $drill_training = new DrillTraining();
+        $drillsContent = $drills->showAll();
+        $drillsArray [] = $drillsContent[0]->getResult();
+        $chosenDrills = array();
+        $x = 0;
+        foreach($drillsArray as $key => $value){
+            foreach ($value as $k => $v){
+                //dump_die($value);
+
+         if(isset($_POST['tr'.$v->id])){
+             array_push($chosenDrills,$_POST['tr'.$v->id] );
+//$x++;
+                //echo 'Hi';
+
+
+         }
+
+
+
+            }}
+        dump_die($chosenDrills);
         $this->view->render('diary/createtraining');
     }
 
@@ -31,7 +53,7 @@ public function createAction(){
         $this->view->render('diary/drills');
     }
 
-    public function categoryAction(){
+    public function Action(){
         $this->view->render('diary/category');
     }
 

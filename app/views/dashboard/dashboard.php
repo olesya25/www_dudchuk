@@ -40,10 +40,21 @@ $usersRequests = $user->showAllUsers();
                                 echo '<td>'. $v->u_name .' '. $v->u_surname .'</td>';
                                 echo '<td>'. $v->u_email. '</td>';
 
-                                echo '<td><a type="button" class="btn btn-warning">Read</a></td>';
+                                echo '<td><a data-read="info'.$btn .'" type="button" class="btn btn-warning">Read</a></td>';
                                 echo '</tr>';
+                                echo '<div style="display: none" id="info' . $btn .'" class="container">';
+                                echo'<div class="row">';
+                                echo'<div class="col-sm-6">';
+                                echo'<div class="card bg-info">';
+                                echo' <div class="card-body">';
+                                echo'<h5 class="card-title">Message</h5>';
+                                echo'<h5 class="card-text">'. $v->message_to_admin . '</h5>';
+                                echo'</div>';
+                                echo'</div>';
+                                echo'</div>';
+                                echo'</div>';
+                                echo'</div>';
                                 $btn++;
-
                             }
                         }
                 }
@@ -53,6 +64,16 @@ $usersRequests = $user->showAllUsers();
         </table>
     </div>
 </div> <!-- /container -->
+<script>
+    $(document).ready(function () {
+        $('.btn-warning').on('click', function () {
+            var btnRead = $(this).attr('data-read');
+//alert(btnRead);
+            $('#' + btnRead).toggle();
+
+        });
+    })
+</script>
 
 
 <?php $this->end(); ?>
