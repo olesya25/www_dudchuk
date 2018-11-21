@@ -8,6 +8,7 @@
 
 class Drill extends Model
 {
+    protected $chosenDrills = [];
 public function __construct(){
     $table = 'drill';
     parent::__construct($table);

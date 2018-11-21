@@ -7,11 +7,12 @@
  */
 
 class Training extends Model{
-    public $belongsTo;
+    public $belongsTo, $lastInserted;
     public function __construct($id){
         $table = 'training';
         parent::__construct($table);
         $this->belongsTo = $id;
+
 
     }
 
@@ -20,9 +21,12 @@ class Training extends Model{
         $training = $this->find(['condition'=>'fk_user_id = ?', 'bind' => [$userId]]);
         return $training;
     }
-
-    public function insertNewTraining($params){
-
+    public function createNewTraining($params){
+            $params['fk_user_id'] = $this->belongsTo;
+           // dump_die($params);
+            $this->assign($params);
+            $this->save();
+            $this->lastInserted = $this->db->getLastId();
     }
 
 }

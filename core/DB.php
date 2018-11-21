@@ -59,6 +59,7 @@ class DB
             $this->result = $this->query->fetchAll(PDO::FETCH_OBJ);
             $this->count = $this->query->rowCount();
             $this->lastIdInsert = $this->pdo->lastInsertId();
+            //dump_die($this->lastIdInsert);
         }else{
             $this->error = true;
 

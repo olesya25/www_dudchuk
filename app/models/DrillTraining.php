@@ -13,6 +13,7 @@ class DrillTraining extends Model{
     }
 
     public function addDrill($params){
+        //dump_die($params);
         $this->assign($params);
         $this->save();
 
