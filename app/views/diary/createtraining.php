@@ -16,7 +16,7 @@ $drillsArray [] = $drillsContent[0]->getResult();?>
 <h1 class="text-center red"></h1>
 <div class="col-md-6 col-md-offset-3 well">
     <form class="form"  action="<?=PROOT?>diary/createtraining" method="post">
-
+        <div class="bg-danger"><?=$this->displayErrors ?></div>
         <h3 class="text-center">Create training</h3>
         <div class="form-group">
             <label for="username">Date of training</label>
