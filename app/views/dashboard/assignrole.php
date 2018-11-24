@@ -44,9 +44,9 @@ $usersRequests = $user->find([
                 $btn = 1;
                 foreach ($usersRequests as $request) {
                     echo '<tr id="btn'. $btn .'">';
-                    echo '<td>'. $request->u_name . '</td>';
-                    echo '<td>'. $request->u_email. '</td>';
-                    echo '<td>'. $request->name_of_pdf. '</td>';
+                    echo '<td>'. htmlspecialchars($request->u_name) . '</td>';
+                    echo '<td>'. htmlspecialchars($request->u_email). '</td>';
+                    echo '<td>'. htmlspecialchars($request->name_of_pdf). '</td>';
                     echo '<td><a data-read="read'. $btn .'" type="button" class="btn btn-warning">Read</a></td>';
                     echo '<td><button data-accept="accept'. $btn .'" type="button" onclick="accept()"class="btn btn-success">Accept</button></td>';
                     echo '<td><button data-deny="deny'. $btn .'" type="button" onclick="deny()" class="btn btn-danger">Deny</button></td>';
@@ -58,7 +58,7 @@ $usersRequests = $user->find([
                     echo'<div class="card bg-info">';
                     echo' <div class="card-body">';
                     echo'<h5 class="card-title">Message</h5>';
-                    echo'<h5 class="card-text">'. $request->message_to_admin . '</h5>';
+                    echo'<h5 class="card-text">'. htmlspecialchars($request->message_to_admin ). '</h5>';
                     echo'</div>';
                     echo'</div>';
                     echo'</div>';
@@ -67,9 +67,9 @@ $usersRequests = $user->find([
                 }
             }else{
                 echo '<tr>';
-                echo '<td>'. $usersRequests->u_name . '</td>';
-                echo '<td>'. $usersRequests->u_email. '</td>';
-                echo '<td>'. $usersRequests->name_of_pdf. '</td>';
+                echo '<td>'. htmlspecialchars($usersRequests->u_name) . '</td>';
+                echo '<td>'. htmlspecialchars($usersRequests->u_email). '</td>';
+                echo '<td>'. htmlspecialchars($usersRequests->name_of_pdf). '</td>';
                 echo '<div class="w3-bar">';
                 echo '<td><a data-read="read1" type="button" class="btn btn-warning">Read</a></td>';
                 echo '<td><button  data-accept ="accept1" type="button"  class="btn btn-success">Accept</button></td>';

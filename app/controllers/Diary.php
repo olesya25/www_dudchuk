@@ -23,7 +23,7 @@ public function createAction(){
 
     public function createtrainingAction(){
         $validation = new Validate();
-        $drill_training = new DrillTraining();
+        $drill_training = new TrainingDrill();
         if(isset($_POST['training'])){
             $validation->check($_POST, [
                 'training_date'=> [

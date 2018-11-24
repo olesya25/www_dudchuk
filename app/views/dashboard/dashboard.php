@@ -13,9 +13,6 @@ $usersRequests = $user->showAllUsers();
 
 <h1 class="text-center red">Dashboard</h1>
 <div class="container">
-    <div class="">
-        <h3 class="text-center">Requests from users</h3>
-    </div>
     <div class="table">
         <table class="table table-striped table-bordered table-hover table-condensed">
             <thead>
@@ -36,10 +33,9 @@ $usersRequests = $user->showAllUsers();
                         foreach ($requestAr as $key => $value){
                             foreach ($value as $k => $v){
                                 echo '<tr id="btn'. $btn .'">';
-                                echo '<td>'. $v->u_registration_date . '</td>';
-                                echo '<td>'. $v->u_name .' '. $v->u_surname .'</td>';
-                                echo '<td>'. $v->u_email. '</td>';
-
+                                echo '<td>'. htmlspecialchars($v->u_registration_date ). '</td>';
+                                echo '<td>'.htmlspecialchars( $v->u_name .' '. $v->u_surname ).'</td>';
+                                echo '<td>'. htmlspecialchars($v->u_email). '</td>';
                                 echo '<td><a data-read="info'.$btn .'" type="button" class="btn btn-warning">Read</a></td>';
                                 echo '</tr>';
                                 echo '<div style="display: none" id="info' . $btn .'" class="container">';
@@ -48,7 +44,7 @@ $usersRequests = $user->showAllUsers();
                                 echo'<div class="card bg-info">';
                                 echo' <div class="card-body">';
                                 echo'<h5 class="card-title">Message</h5>';
-                                echo'<h5 class="card-text">'. $v->message_to_admin . '</h5>';
+                                echo'<h5 class="card-text">'. htmlspecialchars($v->message_to_admin ). '</h5>';
                                 echo'</div>';
                                 echo'</div>';
                                 echo'</div>';

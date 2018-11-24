@@ -154,8 +154,9 @@ class Validate{
         $html = '<ul class="bg-danger">';
         foreach ($this->errors as $error){
             if(is_array($error)){
+                //dump_die($error);
                 $html .= '<li class="text-danger">'.$error[0].'</li>';
-                $html .= '<script>jQuery("document").ready(function() {jQuery("#'.$error[1].'").parent().closest("div").addClass("has-error");
+                $html .= '<script>jQuery("document").ready(function() {jQuery("#'.$error[0].'").parent().closest("div").addClass("has-error");
   
                         });</script>';
             }else{

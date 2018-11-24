@@ -21,6 +21,7 @@ class Dashboard extends Controller {
     }
 
     public function assignroleAction(){
+
         $this->view->render('dashboard/assignrole');
     }
     public function display($items = []){
