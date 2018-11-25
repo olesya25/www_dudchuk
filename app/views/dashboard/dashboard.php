@@ -64,7 +64,6 @@ $usersRequests = $user->showAllUsers();
     $(document).ready(function () {
         $('.btn-warning').on('click', function () {
             var btnRead = $(this).attr('data-read');
-//alert(btnRead);
             $('#' + btnRead).toggle();
 
         });

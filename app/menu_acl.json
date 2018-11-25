@@ -10,6 +10,7 @@
     "New Training" : "diary/createtraining",
     "List of drills" : "diary/drills"
   },
+  "Add drill" : "diary/adddrill",
   "Login" : "register/login",
   "Logout" : "register/logout",
   "Signup" : "register/register"

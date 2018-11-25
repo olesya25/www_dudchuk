@@ -7,6 +7,6 @@
 <?php $this->start('body'); ?>
 <div class="container">
     <div class="container">
-        <h1 class="text-center red">WELCOME ADMIN!</h1>
+        <h1 class="text-center testcss">WELCOME ADMIN!</h1>
     </div>
     <?php $this->end(); ?>

@@ -5,7 +5,7 @@ $drillsContent = $drills->showAll();
 $drillsArray [] = $drillsContent[0]->getResult();?>
 
 
-<?php $this->setTitle('Home')?>
+<?php $this->setTitle('Create training')?>
 
 <?php $this->start('head'); ?>
 
@@ -28,16 +28,16 @@ $drillsArray [] = $drillsContent[0]->getResult();?>
         foreach($drillsArray as $key => $value){
             foreach ($value as $k => $v){
                 echo '<div class="form-group">';
-                echo '<textarea style="display: none" id="dscrp'.$btn.'" class="form-control" name="description[]"></textarea><input type="checkbox" name="drills[]" value="'.$v->id. '" />'.$v->drill_name .'<br/>';
-                echo'<a add-description="dscrp'.$btn.'" type="button" class="btn btn-info myclass">Add description</a>';
+                echo '<textarea style="display: none" id="dscrp'.$btn.'" class="form-control" name="description[]"></textarea><input type="checkbox" class="form-control" name="drills[]" value="'.$v->id. '" />'.$v->drill_name .'<br/>';
+                echo '<a add-descript="dscrp'.$btn.'" type="button" class="btn btn-info myclas">Add description</a>';
                 echo '</div>';
                 $btn++;
             }
         }
             ?>
         <div class="form-group">
-            <label for="training_notes">Aim</label>
-            <textarea placeholder="What your aim to achieve in this training?" name="training_notes" id="tr_aim" class="form-control"></textarea>
+            <label for="training_aim">Aim</label>
+            <textarea placeholder="What your aim to achieve in this training?" name="training_aim" id="tr_aim" class="form-control"></textarea>
         </div>
         <input type="submit" value="Create" name="training" class="btn btn-primary">
 
@@ -80,9 +80,9 @@ $drillsArray [] = $drillsContent[0]->getResult();?>
 </script>
 <script>
     $(document).ready(function () {
-        $('.myclass').on('click', function () {
-             var btnDscrp = $(this).attr('add-description');
-            $('#'+btnDscrp).toggle();
+        $('.myclas').on('click', function () {
+             var btnDscrp = $(this).attr('add-descript');
+            $('#'+ btnDscrp).toggle();
         });
     })
 </script>

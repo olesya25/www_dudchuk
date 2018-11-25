@@ -24,11 +24,17 @@ class TrainingDrill extends Model{
         $arrayDrill = array();
         for($i = 0; $i < $count; $i++){
             $arrayDrill[] = array(
-                'title' => htmlspecialchars($drill[$i]->training_drill_description),
-                'drill_id' => $drill[$i]->fk_drill_id,
+                'title' => $this->drillNameById($drill[$i]->fk_drill_id),
+                'description' => htmlspecialchars($drill[$i]->training_drill_description),
             );
         }
         return $arrayDrill;
+    }
+
+    private function drillNameById($id){
+        $drill = new Drill();
+        $drillName = $drill->findById($id);
+        return htmlspecialchars($drillName->drill_name);
     }
 
 }

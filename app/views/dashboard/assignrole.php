@@ -11,16 +11,9 @@ $usersRequests = $user->find([
         'condition' => 'coach_permission',
         'bind' => 1
     ]);
+
 ?>
-<script>
-    function deny() {
-        alert("Sure you want to deny the request?");
-    }
-    function accept() {
-        var role = <?php $user->assignCoach(2)?>
-       return false;
-    }
-</script>
+
 <body>
 
 <div class="container"><!-- main container-->
@@ -48,7 +41,9 @@ $usersRequests = $user->find([
                     echo '<td>'. htmlspecialchars($request->u_email). '</td>';
                     echo '<td>'. htmlspecialchars($request->name_of_pdf). '</td>';
                     echo '<td><a data-read="read'. $btn .'" type="button" class="btn btn-warning">Read</a></td>';
-                    echo '<td><button data-accept="accept'. $btn .'" type="button" onclick="accept()"class="btn btn-success">Accept</button></td>';
+                    echo'<td><form action="'.PROOT.'dashboard/assignrole" method="post">
+                           <button type="submit" name="accept" value="'.$request->id.'" class="btn btn-success">Accept</button>
+                           </form></td>';
                     echo '<td><button data-deny="deny'. $btn .'" type="button" onclick="deny()" class="btn btn-danger">Deny</button></td>';
                     echo '</tr>';
                     $btn++;
@@ -72,7 +67,8 @@ $usersRequests = $user->find([
                 echo '<td>'. htmlspecialchars($usersRequests->name_of_pdf). '</td>';
                 echo '<div class="w3-bar">';
                 echo '<td><a data-read="read1" type="button" class="btn btn-warning">Read</a></td>';
-                echo '<td><button  data-accept ="accept1" type="button"  class="btn btn-success">Accept</button></td>';
+                echo'<form action="dashboard/assignrole" method="post"><input type="button"  name="accept" value="Accept" class="btn btn-success"></form>';
+               // echo '<td><data-accept ="accept1" type="button"  class="btn btn-success">Accept</button></td>';
                 echo '<td><button data-deny ="deny1" type="button"  class="btn btn-danger">Deny</button></td>';
                 echo '</tr>';
             }

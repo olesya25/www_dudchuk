@@ -69,6 +69,11 @@ class Users extends Model{
 
         $params['u_registration_date'] = date("Y-m-d H:i:s");
         $params['fk_role_id'] = 2;
+        $params['name_of_pdf'] = "";
+        $params['message_to_admin'] = "";
+        $params['coach_permission'] = 0;
+        $params['u_delete'] = 0;
+        //dump_die($params);
         $this->assign($params);
         $this->u_password = password_hash($this->u_password, PASSWORD_DEFAULT);
 

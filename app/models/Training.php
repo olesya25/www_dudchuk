@@ -24,19 +24,26 @@ class Training extends Model{
         for($i = 0; $i < $count; $i++){
             $calendar[] = array(
                 'id' => $training[$i]->id,
-                'title' => htmlspecialchars($training[$i]->training_notes),
-                'date' => $training[$i]->training_date,
+                'title' => htmlspecialchars($training[$i]->training_aim),
+                'notes' => htmlspecialchars($training[$i]->training_notes),
+                'date' => $training[$i]->training_date
             );
         }
         return $calendar;
     }
     public function createNewTraining($params){
             $params['fk_user_id'] = $this->belongsTo;
+            $params['training_notes'] = "";
+            //dump_die($params);
             $this->assign($params);
             $this->save();
             $this->lastInserted = $this->db->getLastId();
     }
 
+    public function addNotes($id, $notes){
+        //dump_die($notes);
+        $this->update($id, ['training_notes' => $notes]);
+    }
 
 
 

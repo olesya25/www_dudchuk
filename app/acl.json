@@ -13,15 +13,19 @@
     "Register" : ["logout"],
     "Tools" : ["*"]
   },
-  "User" : {
-    "denied" : {},
-    "Home" : ["userindex", "coachrequest"],
-    "Diary" : ["*"]
-  },
+
 
   "Coach" : {
     "denied" : {},
-    "Home" : ["coachindex"]
+    "Home" : ["coachindex"],
+    "Diary": ["*"]
+  },
+  "User" : {
+    "denied" : {
+      "Diary" : ["adddrill"]
+    },
+    "Home" : ["userindex", "coachrequest"],
+    "Diary" : ["*"]
   },
   "Admin" : {
     "denied" : {
