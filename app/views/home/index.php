@@ -6,7 +6,9 @@
 
 <?php $this->start('body'); ?>
 
-        <h1 class="text-center red">WELCOME!</h1>
+<!--<div class="content">-->
+<!--    Start right now<a href="register" >Create  diary</a>-->
+<!--</div>-->
 
 <?php $this->end(); ?>
 

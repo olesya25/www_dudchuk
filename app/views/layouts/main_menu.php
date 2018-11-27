@@ -3,8 +3,9 @@ $menu = Router::getMenu('menu_acl');
 $currentPage = currentPage();
 $html ='';
 ?>
+<body>
 <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
+<!--    <div class="container-fluid">-->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main_menu">
                 <span class="icon-bar"></span>
@@ -35,7 +36,7 @@ $html ='';
                 <?php else:
                     $active = ($value == $currentPage)? 'active': ''; ?>
                 <?php if($key == 'Login'): ?>
-                    <?php $html .= '<li><a href="'.$value.'"><span class="glyphicon glyphicon-log-in"></span>' .$key.'</a></li>'?>
+                    <?php $html .= '<li><a href="'.$value.'"><span class="glyphicon glyphicon-log-in"></span>' .$key.'</a></li>'; ?>
                 <?php elseif($key == 'Logout'): ?>
                     <?php $html .= '<li><a href="'.$value.'"><span class="glyphicon glyphicon-log-in"></span>' .$key.'</a></li>'?>
                 <?php elseif($key == 'Signup'): ?>
@@ -54,7 +55,6 @@ $html ='';
                 <?=$html?>
             </ul>
         </div>
-    </div>
+<!--    </div>-->
 </nav>
 </body>
-</html>

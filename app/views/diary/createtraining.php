@@ -37,7 +37,7 @@ $drillsArray [] = $drillsContent[0]->getResult();?>
             ?>
         <div class="form-group">
             <label for="training_aim">Aim</label>
-            <textarea placeholder="What your aim to achieve in this training?" name="training_aim" id="tr_aim" class="form-control"></textarea>
+            <textarea placeholder="What are your goals?" name="training_aim" id="tr_aim" class="form-control"></textarea>
         </div>
         <input type="submit" value="Create" name="training" class="btn btn-primary">
 

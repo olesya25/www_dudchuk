@@ -5,10 +5,10 @@
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div class="container">
-    <div class="container">
-        <h1 class="text-center red">WELCOME USERR!</h1>
-    </div>
+<!--<div class="content">-->
+<!--        Start right now<input type="submit" value="Go to my link location"-->
+<!--                              onclick="window.location='createtraining';" />-->
+<!--</div>-->
     <?php $this->end(); ?>
 
 

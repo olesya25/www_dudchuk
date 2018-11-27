@@ -11,8 +11,9 @@ $usersRequests = $user->showAllUsers();
 //dump_die($usersRequests);
 ?>
 
-<h1 class="text-center red">Dashboard</h1>
-<div class="container">
+
+<div class="container rounded-bord centered" style="background-color: white">
+    <h1 class="text-center red">Dashboard</h1>
     <div class="table">
         <table class="table table-striped table-bordered table-hover table-condensed">
             <thead>

@@ -4,9 +4,7 @@
 <?php $this->start('head'); ?>
 
 <?php $this->end(); ?>
-
 <?php $this->start('body'); ?>
-
     <div class="centered rounded-bord gold">
         <form class="form" action="<?=PROOT?>home/coachrequest" method="post" enctype="multipart/form-data">
             <div class="bg-danger"><?=$this->displayErrors ?></div>

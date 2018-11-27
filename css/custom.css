@@ -1,7 +1,24 @@
 
 /* calendar */
+body {
+    height: 100%;
+    margin:0px;
+    background: url(/www_dudchuk/app/views/layouts/chris.png) no-repeat center center fixed ;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+
+}
 .testcss{color: red; }
 .centered {
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+ }
+.centered-big {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -16,9 +33,38 @@
     display: inline-block;
 
 }
+.content{
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-transform: uppercase;
+    font-size: 60px;
+    font-family: AppleGothic;
+    color: whitesmoke;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.content button{
+    font-size: 24px;
+    display: block;
+    background-color:#d43f3a;
+    text-align: center;
+    color: whitesmoke;
+    padding: 10px;
+    cursor: pointer;
+}
 .rounded-bord{
+     opacity: 1;
+     border: 2px solid darkslategray;
+     padding: 30px;
+     border-radius: 8px;
+ }
 
-    border: 2px solid darkslategray;
+.rounded-bord:hover{
+    opacity: 1;
+    border:  darkslategray;
     padding: 30px;
     border-radius: 8px;
 }
@@ -26,8 +72,13 @@
     background-color: palegoldenrod;
 }
 .diary-back{
-    background-color: #afd9ee;
+    background: url("/www_dudchuk/app/views/diary/diary.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
+
 .diary-tr{
     background-color: #faebcc;
 }

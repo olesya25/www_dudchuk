@@ -72,7 +72,7 @@ class Validate{
                             break;
                         case 'valid_url':
                             if(!filter_var($value, FILTER_VALIDATE_URL)){
-                                $this->addError(["{$display} is not a valid", $field]);
+                                $this->addError(["{$display} is not valid", $field]);
                             }
                             break;
 
