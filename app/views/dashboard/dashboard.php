@@ -12,18 +12,15 @@ $usersRequests = $user->showAllUsers();
 ?>
 
 
-<div class="container rounded-bord centered" style="background-color: white">
+<div class="container rounded-bord" style="background-color: white">
     <h1 class="text-center red">Dashboard</h1>
     <div class="table">
-        <table class="table table-striped table-bordered table-hover table-condensed">
+        <table id="myTable" class="table table-striped table-bordered table-hover table-condensed">
             <thead>
             <tr>
                 <th>Registration date</th>
                 <th>Name</th>
                 <th>Email Address</th>
-
-                <th>Information</th>
-
             </tr>
             </thead>
             <tbody>
@@ -37,20 +34,8 @@ $usersRequests = $user->showAllUsers();
                                 echo '<td>'. htmlspecialchars($v->u_registration_date ). '</td>';
                                 echo '<td>'.htmlspecialchars( $v->u_name .' '. $v->u_surname ).'</td>';
                                 echo '<td>'. htmlspecialchars($v->u_email). '</td>';
-                                echo '<td><a data-read="info'.$btn .'" type="button" class="btn btn-warning">Read</a></td>';
                                 echo '</tr>';
-                                echo '<div style="display: none" id="info' . $btn .'" class="container">';
-                                echo'<div class="row">';
-                                echo'<div class="col-sm-6">';
-                                echo'<div class="card bg-info">';
-                                echo' <div class="card-body">';
-                                echo'<h5 class="card-title">Message</h5>';
-                                echo'<h5 class="card-text">'. htmlspecialchars($v->message_to_admin ). '</h5>';
-                                echo'</div>';
-                                echo'</div>';
-                                echo'</div>';
-                                echo'</div>';
-                                echo'</div>';
+
                                 $btn++;
                             }
                         }
@@ -60,17 +45,7 @@ $usersRequests = $user->showAllUsers();
             </tbody>
         </table>
     </div>
-</div> <!-- /container -->
-<script>
-    $(document).ready(function () {
-        $('.btn-warning').on('click', function () {
-            var btnRead = $(this).attr('data-read');
-            $('#' + btnRead).toggle();
-
-        });
-    })
-</script>
-
+</div>
 
 <?php $this->end(); ?>
 

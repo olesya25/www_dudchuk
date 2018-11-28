@@ -5,10 +5,9 @@
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-
-<!--<div class="content">-->
-<!--    Start right now<a href="register" >Create  diary</a>-->
-<!--</div>-->
+<div class="centered">
+    <h1>WELCOME</h1>
+</div>
 
 <?php $this->end(); ?>
 

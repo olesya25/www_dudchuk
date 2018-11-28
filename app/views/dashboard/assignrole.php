@@ -39,62 +39,40 @@ $usersRequests = $user->find([
                     echo '<tr id="btn'. $btn .'">';
                     echo '<td>'. htmlspecialchars($request->u_name) . '</td>';
                     echo '<td>'. htmlspecialchars($request->u_email). '</td>';
-                    echo '<td>'. htmlspecialchars($request->name_of_pdf). '</td>';
+                    echo '<td><a href="'.PROOT.'app/library/helpers/download.php?uploads='. htmlspecialchars($request->name_of_pdf). '">Download file</a> </td>';
                     echo '<td><a data-read="read'. $btn .'" type="button" class="btn btn-warning">Read</a></td>';
                     echo'<td><form action="'.PROOT.'dashboard/assignrole" method="post">
                            <button type="submit" name="accept" value="'.$request->id.'" class="btn btn-success">Accept</button>
                            </form></td>';
                     echo '<td><button data-deny="deny'. $btn .'" type="button" onclick="deny()" class="btn btn-danger">Deny</button></td>';
                     echo '</tr>';
-                    $btn++;
-                    echo'<div style="display: none" id="info" class="container">';
+
+                    echo'<div style="display: none" id="read'.$btn. '" class=" col-sm-6 col-md-offset-3 rounded-bord"">';
                     echo'<div class="row">';
                     echo'<div class="col-sm-6">';
-                    echo'<div class="card bg-info">';
+                    echo'<div class="card">';
                     echo' <div class="card-body">';
                     echo'<h5 class="card-title">Message</h5>';
+                    echo'<h10>By '. htmlspecialchars($request->u_name). ' </h10>';
                     echo'<h5 class="card-text">'. htmlspecialchars($request->message_to_admin ). '</h5>';
                     echo'</div>';
                     echo'</div>';
                     echo'</div>';
                     echo'</div>';
                     echo'</div>';
+                    $btn++;
                 }
-            }else{
-                echo '<tr>';
-                echo '<td>'. htmlspecialchars($usersRequests->u_name) . '</td>';
-                echo '<td>'. htmlspecialchars($usersRequests->u_email). '</td>';
-                echo '<td>'. htmlspecialchars($usersRequests->name_of_pdf). '</td>';
-                echo '<div class="w3-bar">';
-                echo '<td><a data-read="read1" type="button" class="btn btn-warning">Read</a></td>';
-                echo'<form action="dashboard/assignrole" method="post"><input type="button"  name="accept" value="Accept" class="btn btn-success"></form>';
-               // echo '<td><data-accept ="accept1" type="button"  class="btn btn-success">Accept</button></td>';
-                echo '<td><button data-deny ="deny1" type="button"  class="btn btn-danger">Deny</button></td>';
-                echo '</tr>';
             }
             ?>
-            </tbody>
+
         </table>
 
     </div>
-</div> <!-- /container -->
+</div>
 
 </body>
 
-<div style="display: none" id="info" class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="card bg-info">
-                <div class="card-body">
-                    <h5 class="card-title">'. $v->drill_name . '</h5>
-                    <p class="card-text">'. $v->drill_description.'</p>
-                    <a href="#" class="btn btn-primary btn-xs">Close</a>
-                </div>
-            </div>
-        </div>
 
-    </div>
-</div>
 <script>
     $(document).ready(function () {
         $('.btn-success ').on('click', function () {
@@ -114,9 +92,9 @@ $usersRequests = $user->find([
     })
     $(document).ready(function () {
         $('.btn-warning').on('click', function () {
-            var btnDeny = $(this).attr('data-read');
+            var btnRead = $(this).attr('data-read');
 
-            $('#info').toggle();
+            $('#' + btnRead).toggle();
 
         });
     })

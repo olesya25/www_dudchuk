@@ -3,7 +3,7 @@
 <?php $this->end()?>
 
 <?php $this->start('body')?>
-<div class="centered rounded-bord" style="background-color: yellowgreen">
+<div class="col-md-6 col-md-offset-3 rounded-bord" style="background-image: linear-gradient(to right, white, palegoldenrod)">
     <h3 class="text-center">Get started!</h3><hr>
     <form class="form" action="<?=PROOT?>register/register" method="post">
         <div class="bg-danger"><?=$this->displayErrors ?></div>
