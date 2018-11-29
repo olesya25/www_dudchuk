@@ -16,7 +16,7 @@ $usersRequests = $user->find([
 
 <body>
 
-<div class="container rounded-bord centered" style="background-color: white"><!-- main container-->
+<div class="container rounded-bord " style="background-color: white"><!-- main container-->
     <div class="">
         <h3 class="text-center">Requests from users</h3>
     </div>

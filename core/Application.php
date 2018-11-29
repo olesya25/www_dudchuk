@@ -7,11 +7,18 @@
  */
 
 class Application{
-
+    /**
+     * Application constructor.
+     * Nastaví režim hlašení chyb
+     */
     public function __construct(){
         $this->_set_report();
     }
 
+    /**
+     * Nastavi režim hlašení chýb, pokud je konstanta DEBUG je true.
+     * Hodnotu konstanty lze měnit v souboru configurations.php
+     */
     private function _set_report(){
         if(DEBUG){
             error_reporting(E_ALL);

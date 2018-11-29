@@ -11,7 +11,13 @@ class Controller extends Application {
     protected $controller, $action;
     public $view;
 
-
+    /**
+     * Controller constructor. Dědí od třidy Application
+     * V konstruktoru se nastaví hodnoty kontrolleru a metody.
+     * Vytvoří se nováinstance třidy View.
+     * @param $controller   název kontrolleru
+     * @param $action       název metody
+     */
     public function __construct($controller, $action)
     {
         parent::__construct();
@@ -19,13 +25,6 @@ class Controller extends Application {
         $this->action = $action;
         $this->view = new View();
 
-    }
-
-    protected function load_model($model){
-        if(class_exists($model)){
-            $this->{$model.'Model'} = new $model(strtolower($model));
-
-        }
     }
 
 }

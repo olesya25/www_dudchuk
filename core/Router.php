@@ -7,7 +7,12 @@
  */
 
 class Router{
-
+    /**
+     * Metoda rozdělí url adresu na častí podle '/'.
+     * První hodnota označuje kontroller, druha metodu, kterou obsahuje kontroller.
+     * Potom nasledují argumenty, které budou předané dané metodě
+     * @param $url url adresa
+     */
     public static function route($url){
 
         /////////////////////CONTROLLER/////////////////////////////////////
@@ -39,16 +44,12 @@ class Router{
         if(!$access){
             $controller = $controller_name = ACCESS_RESTRICTED;
             $action = 'indexAction';
-
-
         }
-
         /////////////////////ARGUMENTY///////////////////////////////////////
         $params = $url;
 
         /////////////////////////////////////////////////////////////////////
         $dispatcher = new $controller($controller_name, $action);
-
 
         if(method_exists($controller, $action)){
             call_user_func_array([$dispatcher, $action], $params);
@@ -56,6 +57,11 @@ class Router{
             echo 'Method doesn\'t exist';
         }
     }
+
+    /**
+     * Přesměrovaní na jinou stranku
+     * @param $location  adresa, kde se strranka nachazí
+     */
     public static function redirect($location){
         if(!headers_sent()){
             header('Location:'.PROOT.$location);
@@ -71,6 +77,13 @@ class Router{
 
         }
     }
+
+    /**
+     * Statická metoda zjísti jestli daný uživatel má dostup do kontrolleru a metodě
+     * @param $controller_name      Název kontrolleru
+     * @param string $action_name   Názav metody
+     * @return bool                 true pokud má dostup, jinak false
+     */
     public static function hasAccess($controller_name, $action_name = 'index'){
         $aclFile = file_get_contents(ROOT. '/app/acl.json');
         $acl = json_decode($aclFile, true);// asociativni pole
@@ -103,6 +116,11 @@ class Router{
 
     }
 
+    /**
+     * Hlavní menu, které pro každého uživatele s určitou roli je jiný
+     * @param $menu  nazev dokumentu v json formatu, obsahujicí položky v menu
+     * @return array Pole s položky menu
+     */
     public static function getMenu($menu){
         //prochazi pole a subpole
         $menuArray = [];
@@ -135,9 +153,14 @@ class Router{
         return $menuArray;
     }
 
+    /**
+     * Pomocná metoda vratí odkaz, pokud uživatel má dostup
+     * @param $value          odkaz
+     * @return bool|string    vratí odkaz, pokud uživatel má dostup
+     */
     private static function get_link($value){
 
-        // kontroluju zda neni externi odkaz pomoci regularnich vyrazu
+        // kontroluju zda není externí odkaz pomoci regularních vyrazů
         if(preg_match('/https?:\/\//', $value) == 1){
             return $value;
         }else{

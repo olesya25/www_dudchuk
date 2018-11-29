@@ -13,6 +13,10 @@ class View{
     {
     }
 
+    /**
+     * Inkluduje soubor, obsahujicí view dné stránky
+     * @param $viewName   cesta a nazev souboru
+     */
     public function render($viewName){
         $viewArray = explode('/', $viewName);
         $viewNameString = implode(DS, $viewArray);
@@ -26,6 +30,11 @@ class View{
 
     }
 
+    /**
+     *
+     * @param $type
+     * @return bool
+     */
     public function getContent($type){
         switch ($type){
             case 'head':
@@ -39,12 +48,19 @@ class View{
         }
     }
 
+    /**
+     * spustí bufferovaný vystup podle názvu
+     * @param $type název
+     */
     public function start($type){
         $this->outputBuffer = $type;
         ob_start();
 
     }
 
+    /**
+     *přeruší bufferovaný vystup
+     */
     public function end(){
         switch ($this->outputBuffer){
             case 'head':
@@ -58,12 +74,27 @@ class View{
         }
     }
 
+    /**
+     * Nastaví záhlaví stranky
+     * @param $title   záhlaví
+     */
     public function setTitle($title){
         $this->title = $title;
     }
+
+    /**
+     *
+     * @return string   vratí názav záhlaví
+     */
     public function getTitle(){
         return $this->title;
     }
+
+    /**
+     *  Nastaví layout
+     * @param $layout
+     *
+     */
     public function  setLayout($layout){
         $this->layout = $layout;
     }

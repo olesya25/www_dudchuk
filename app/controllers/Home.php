@@ -13,6 +13,9 @@ class Home extends Controller{
         parent::__construct($controller, $action);
     }
 
+    /**
+     * Přesměruje uživatele na uvodní stranku podle roli
+     */
     public function indexAction(){
     if(currentUser()){
     $role  = currentUser()->acl();
@@ -31,7 +34,7 @@ class Home extends Controller{
     }
 
     /**
-     * Domaci stranka pro obycejneho uzivatele
+     * Domací stranka pro obyčejného uživatele
      */
     public function userindexAction(){
 
@@ -43,10 +46,8 @@ class Home extends Controller{
             $validation = new Validate();
             if($validation->fileUpload()){
                 $fileName = $validation->fileName;
-                //dump_die($fileName);
                 $this->view->displayErrors = $validation->displaySuccess();
                 $message = Input::sanitize($_POST['intro']);
-               // dump_die($message);
                 $user = new Users();
                 $user->update(currentUser()->id, [
                     'message_to_admin' => $message,
@@ -61,7 +62,7 @@ class Home extends Controller{
         $this->view->render('home/coachrequest');
     }
     /**
-     * Domaci stranka pro admina
+     * Domací stranka pro admina
      */
     public function adminindexAction(){
         $this->view->render('home/adminindex');

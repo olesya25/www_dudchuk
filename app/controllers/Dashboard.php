@@ -8,31 +8,25 @@
 
 class Dashboard extends Controller {
 
-
+    /**
+     * Dashboard constructor.
+     * @param $controller
+     * @param $action
+     */
     public function __construct($controller, $action){
         parent::__construct($controller, $action);
     }
-//    /**
-//     * Priradi role trenera uzivateli
-//     * @param $id       id uzivatele, kteromu prirazujeme role
-//     */
-//    private function assignCoach($id){
-//        if( $this->update($id, ['fk_role_id' => 3, 'coach_permission' => 0])){
-//
-//            //dump_die($id);
-//            return "The role of coach was assigned";
-//        }else{
-//            return "Some error occurred";
-//        }
-//    }
-    public function dashboardAction(){
-        $usr = new Users();
 
-        //echo
-        //$this->view->dispaylUsers =
+    /**
+     *
+     */
+    public function dashboardAction(){
         $this->view->render('dashboard/dashboard');
     }
 
+    /**
+     * Metoda se stará o  přiřazení role trenera uživateli
+     */
     public function assignroleAction(){
         if(isset($_POST['accept'])){
             $user = new Users();
@@ -41,9 +35,5 @@ class Dashboard extends Controller {
 
         $this->view->render('dashboard/assignrole');
     }
-    public function display($items = []){
-
-    }
-
 
 }

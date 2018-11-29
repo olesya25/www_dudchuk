@@ -13,6 +13,12 @@ class Validate{
         $this->db = DB::getInstance();
     }
 
+    /**
+     * Ověři spravnost vstupných dat, podle ruzných kritérií
+     * @param $data            vstupná data
+     * @param array $fields    pole s kritérii
+     * @return $this           vratí objekt třidy s nastavenymý atributy
+     */
     public function check($data, $fields =[]){
         $this->errors = [];
         foreach ($fields as $field => $rule){
@@ -20,7 +26,6 @@ class Validate{
             $display = $rule['display'];
             foreach ($rule as $rule_name => $rule_value){
                 $value = Input::sanitize(trim ($data[$field]));
-               // dump_die($rule);
                 if($rule_name === 'required' && empty($value)){
                        $this->addError(["{$display} is required", $field]);
                 } else if(!empty($value)){
@@ -86,6 +91,9 @@ class Validate{
         return $this;
     }
 
+    /**
+     * Pokud se vyskytnou nějaké chyby během ověřování, tak nastaví atribut passed na false, jinak - true
+     */
     public function addError($error){
         $this->errors[] = $error;
         if(empty($this->errors)){
@@ -97,6 +105,10 @@ class Validate{
 
     }
 
+    /**
+     *
+     * @return bool   Vratí true nebo false, podle toho jakou hodnotu má atribut passed
+     */
     public function passed(){
         return $this->passed;
     }
@@ -108,6 +120,10 @@ class Validate{
         return $this->errors;
     }
 
+    /**
+     * Ověří načtení dokumentu
+     * @return bool     true pokud načtení prošlo bez chyb, jinak false
+     */
     public function fileUpload(){
         if(empty($_FILES)){
             return false;
@@ -155,12 +171,14 @@ class Validate{
         }
 
 
-
+    /**
+     * Vypiše chyby na obrazovku
+     * @return string    string obsahujicí jQuery a html pro vypis chyby
+     */
     public function displayErrors(){
         $html = '<ul class="bg-danger">';
         foreach ($this->errors as $error){
             if(is_array($error)){
-                //dump_die($error);
                 $html .= '<li class="text-danger">'.$error[0].'</li>';
                 $html .= '<script>jQuery("document").ready(function() {jQuery("#'.$error[0].'").parent().closest("div").addClass("has-error");
   
@@ -175,6 +193,10 @@ class Validate{
         return $html;
     }
 
+    /**
+     * Vypiše informace na obrazovku, o tom, že operace proběhla uspěšně
+     * @return string    string obsahujicí jQuery a html pro vypis uspěchu
+     */
     public function displaySuccess(){
         $html = '<ul class="bg-success"><li class="text-success">'.$this->success.'</li></ul>';
         return $html;

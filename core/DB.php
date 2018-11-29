@@ -259,7 +259,7 @@ class DB
      * Getter.
      *
      * @param $table         Nazev tabulky
-     * @return mixed         Pole s nazvy sloupcu, a jejich parametry
+     * @return mixed         Objekt s nazvy sloupcu, a jejich parametry
      */
     public function getColumns($table){
         return $this->query("SHOW COLUMNS FROM {$table}")->getResult();

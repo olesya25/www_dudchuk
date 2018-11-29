@@ -7,11 +7,20 @@
  */
 
 class Input{
-
+    /**
+     * Metoda sanitizuje data
+     * @param $data      data
+     * @return string    Vrací sanitizovaný řetězec
+     */
 public static function sanitize($data){
     return htmlentities($data, ENT_QUOTES, 'UTF-8');
 }
 
+    /**
+     * Metoda sanitizuje vstup od uživatele
+     * @param $input  Vstup od uživatele
+     * @return string Vrací sanitizovaný řetězec
+     */
 public static function get($input){
     if(isset($_POST[$input])){
         return self::sanitize($_POST[$input]);
